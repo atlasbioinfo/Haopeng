@@ -1,0 +1,404 @@
+{
+  "personal": {
+    "name": {
+      "en": "Haopeng Yu",
+      "cn": "余浩鹏"
+    },
+    "title": {
+      "en": "AI in Biology Researcher",
+      "cn": "人工智能 × 生物学 研究员"
+    },
+    "subtitle": {
+      "en": "Postdoctoral Scientist | HFSP Fellow | John Innes Centre",
+      "cn": "博士后研究员 | HFSP学者 | 约翰英纳斯中心"
+    },
+    "photo": "img/hyu_photo.png"
+  },
+  "education": [
+    {
+      "year": "2014-2020",
+      "degree": {
+        "en": "PhD in Bioinformatics",
+        "cn": "生物信息学 博士"
+      },
+      "institution": {
+        "en": "Direct PhD Program, Northwest A&F University, Yangling, Shaanxi, China",
+        "cn": "西北农林科技大学 直博项目，陕西杨凌，中国"
+      }
+    },
+    {
+      "year": "2010-2014",
+      "degree": {
+        "en": "Bachelor's in Biotechnology",
+        "cn": "生物技术 学士"
+      },
+      "institution": {
+        "en": "Northwest A&F University, Yangling, Shaanxi, China",
+        "cn": "西北农林科技大学，陕西杨凌，中国"
+      }
+    }
+  ],
+  "employment": [
+    {
+      "year": "2021-Present",
+      "position": {
+        "en": "Postdoctoral Scientist",
+        "cn": "博士后研究员"
+      },
+      "details": [
+        {
+          "en": "Human Frontier Science Program (HFSP) Fellow",
+          "cn": "人类前沿科学计划(HFSP)学者"
+        },
+        {
+          "en": "John Innes Centre, UK",
+          "cn": "约翰英纳斯中心，英国"
+        }
+      ]
+    }
+  ],
+  "grants": [
+    {
+      "year": "2024-2027",
+      "title": {
+        "en": "BBSRC Bioinformatics and Biological Resources Fund",
+        "cn": "BBSRC 生物信息学与生物资源基金"
+      },
+      "role": {
+        "en": "Research and Innovation Associate",
+        "cn": "研究与创新员"
+      },
+      "amount": "£1.15M"
+    },
+    {
+      "year": "2024-2025",
+      "title": {
+        "en": "Research Committee for Institute Development Grant (IDG)",
+        "cn": "研究委员会研究所发展基金(IDG)"
+      },
+      "description": {
+        "en": "PlantAIGenius: Revolutionizing Plant Science Research with AI",
+        "cn": "植物AI天才：用人工智能革新植物科学研究"
+      },
+      "role": {
+        "en": "Co-investigator",
+        "cn": "共同研究员"
+      },
+      "amount": "£23K"
+    },
+    {
+      "year": "2025-2035",
+      "title": {
+        "en": "Faraday Discovery Fellowships",
+        "cn": "法拉第发现研究员基金"
+      },
+      "role": {
+        "en": "Participant",
+        "cn": "参与者"
+      },
+      "amount": "£8M"
+    }
+  ],
+  "awards": [
+    {
+      "year": "2021-2024",
+      "title": {
+        "en": "Human Frontier Science Program (HFSP) Long-Term Fellowship",
+        "cn": "人类前沿科学计划(HFSP)长期奖学金"
+      },
+      "amount": "£240K"
+    },
+    {
+      "year": "2024",
+      "title": {
+        "en": "Special Bonus and Exceptional Performance Award",
+        "cn": "特别奖金与杰出表现奖"
+      },
+      "institution": {
+        "en": "Norwich BioScience Institutes",
+        "cn": "诺里奇生物科学研究院"
+      },
+      "amount": "£1,000"
+    },
+    {
+      "year": "2022",
+      "title": {
+        "en": "GENius of the Month",
+        "cn": "本月基因天才奖"
+      },
+      "institution": {
+        "en": "John Innes Centre",
+        "cn": "约翰英纳斯中心"
+      }
+    },
+    {
+      "year": "2014-2019",
+      "title": {
+        "en": "Academic Scholarship (each year)",
+        "cn": "学业奖学金（每年）"
+      },
+      "institution": {
+        "en": "Northwest A&F University",
+        "cn": "西北农林科技大学"
+      },
+      "amount": "￥30K"
+    }
+  ],
+  "academicService": {
+    "peerReview": {
+      "title": {
+        "en": "Peer Review Contributions",
+        "cn": "同行评审贡献"
+      },
+      "journals": {
+        "en": "Briefings in Bioinformatics, Nature, NAR Genomics and Bioinformatics, Non-Coding RNA, Computational and Structural Biotechnology Journal",
+        "cn": "《生物信息学简报》、《自然》、《NAR基因组学与生物信息学》、《非编码RNA》、《计算与结构生物技术杂志》"
+      }
+    },
+    "editorial": {
+      "title": {
+        "en": "Editorial Responsibilities",
+        "cn": "编辑职责"
+      },
+      "journal": {
+        "en": "International Journal of Molecular Sciences",
+        "cn": "《国际分子科学杂志》"
+      },
+      "topics": {
+        "en": "\"Research on Artificial Intelligence in Plant Biology\", \"Machine Learning in RNA and Chromatin Dynamics\"",
+        "cn": "\"植物生物学中的人工智能研究\"、\"RNA与染色质动力学中的机器学习\""
+      }
+    },
+    "mentoring": {
+      "title": {
+        "en": "Mentor Experience",
+        "cn": "指导经验"
+      },
+      "description": {
+        "en": "Supervised 1 PhD student at John Innes Centre, 2 Master's students, and about 5 undergraduate students at Northwest A&F University",
+        "cn": "指导约翰英纳斯中心1名博士生、2名硕士生及西北农林科技大学约5名本科生"
+      }
+    }
+  },
+  "presentations": [
+    {
+      "year": "2025",
+      "type": "Oral",
+      "title": {
+        "en": "Norwich RNA Club - Norwich, UK",
+        "cn": "诺里奇RNA俱乐部 - 英国诺里奇"
+      }
+    },
+    {
+      "year": "2025",
+      "type": "Oral",
+      "title": {
+        "en": "New Phytologist Next Generation Scientists Symposium - Birmingham, UK",
+        "cn": "新植物学家新一代科学家研讨会 - 英国伯明翰"
+      }
+    },
+    {
+      "year": "2025",
+      "type": "Oral",
+      "title": {
+        "en": "RNA-AI Conference - Monte Verita, Switzerland",
+        "cn": "RNA-AI会议 - 瑞士真理之山"
+      }
+    },
+    {
+      "year": "2025",
+      "type": "Oral",
+      "title": {
+        "en": "CEPAMS Annual Symposium - Shanghai, China",
+        "cn": "CEPAMS年度研讨会 - 中国上海"
+      }
+    },
+    {
+      "year": "2024",
+      "type": "Oral",
+      "title": {
+        "en": "Cambridge Chem&Bio Forum - Cambridge, UK",
+        "cn": "剑桥化学与生物论坛 - 英国剑桥"
+      }
+    },
+    {
+      "year": "2024",
+      "type": "Oral",
+      "title": {
+        "en": "JIC/TSL Annual Science Meeting - Norwich, UK",
+        "cn": "JIC/TSL年度科学会议 - 英国诺里奇"
+      }
+    },
+    {
+      "year": "2024",
+      "type": "Poster",
+      "title": {
+        "en": "20th RSC Nucleic Acids Forum - London, UK",
+        "cn": "第20届RSC核酸论坛 - 英国伦敦"
+      }
+    },
+    {
+      "year": "2024",
+      "type": "Oral",
+      "title": {
+        "en": "Norwich RNA Club - Norwich, UK",
+        "cn": "诺里奇RNA俱乐部 - 英国诺里奇"
+      }
+    },
+    {
+      "year": "2024",
+      "type": "Oral",
+      "title": {
+        "en": "RNA UK 2024 Meeting - Windermere, UK",
+        "cn": "RNA UK 2024会议 - 英国温德米尔"
+      }
+    },
+    {
+      "year": "2023",
+      "type": "Oral",
+      "title": {
+        "en": "22nd HFSP Awardees Meeting - Cape Town, South Africa",
+        "cn": "第22届HFSP获奖者会议 - 南非开普敦"
+      }
+    },
+    {
+      "year": "2023",
+      "type": "Oral",
+      "title": {
+        "en": "19th RSC Nucleic Acids Forum - London, UK",
+        "cn": "第19届RSC核酸论坛 - 英国伦敦"
+      }
+    },
+    {
+      "year": "2023",
+      "type": "Poster",
+      "title": {
+        "en": "28th RNA Society Annual Meeting - Singapore",
+        "cn": "第28届RNA学会年会 - 新加坡"
+      }
+    },
+    {
+      "year": "2023",
+      "type": "Oral",
+      "title": {
+        "en": "Human Centric Artificial/Computational Intelligence and Applications Workshop - Exeter, UK",
+        "cn": "以人为本的人工/计算智能与应用研讨会 - 英国埃克塞特"
+      }
+    },
+    {
+      "year": "2022",
+      "type": "Oral",
+      "title": {
+        "en": "21st HFSP Awardees Meeting - Virtual",
+        "cn": "第21届HFSP获奖者会议 - 线上"
+      }
+    }
+  ],
+  "publications": [
+    {
+      "authors": "*Yu, H., Yang, H., Sun, W., Yan, Z., Yang, X., Zhang, H., ... & Li, K.",
+      "year": "2024",
+      "title": "An interpretable RNA foundation model for exploring functional RNA motifs in plants.",
+      "journal": "Nature Machine Intelligence",
+      "doi": "10.1038/s42256-024-00946-z",
+      "note": "(*co-first author)"
+    },
+    {
+      "authors": "Wu, H., *Yu, H., Zhang Y., Yang B., Sun W., Li Q., Liu B., Ding Y., Zhang H.",
+      "year": "2024",
+      "title": "Unveiling RNA Structure-mediated Regulations of RNA Stability in Wheat.",
+      "journal": "Nature Communication",
+      "doi": "10.1038/s41467-024-54172-7",
+      "note": "(*co-first author)"
+    },
+    {
+      "authors": "#Yu, H., Li, F., Yang, B., Qi, Y., Guneri, D., Chen, W, Waller, Z. A. E., Li, Ke, & Ding, Y.",
+      "year": "2024",
+      "title": "iM-Seeker: A Webserver for DNA i-Motifs Prediction and Scoring via Automated Machine Learning.",
+      "journal": "Nucleic Acids Research",
+      "doi": "10.1093/nar/gkae315",
+      "note": "(#co-corresponding and co-first author)"
+    },
+    {
+      "authors": "Yang, B., Guneri, D., #Yu, H., Wright, E. P., Chen, W., Waller, Z. A. E., & Ding, Y.",
+      "year": "2024",
+      "title": "Prediction of DNA i-motifs via machine learning.",
+      "journal": "Nucleic Acids Research",
+      "doi": "10.1093/nar/gkae092",
+      "note": "(#co-corresponding and co-first author)"
+    },
+    {
+      "authors": "#Yu, H., Qi, Y., Yang, B., Yang, X., & Ding, Y.",
+      "year": "2023",
+      "title": "G4Atlas: A comprehensive transcriptome-wide G-quadruplex database.",
+      "journal": "Nucleic Acids Research",
+      "volume": "51(D1)",
+      "pages": "D126–D134",
+      "doi": "10.1093/nar/gkac896",
+      "note": "(*co-corresponding author)"
+    },
+    {
+      "authors": "#Yu, H., Qi, Y., & Ding, Y.",
+      "year": "2022",
+      "title": "Deep Learning in RNA Structure Studies.",
+      "journal": "Frontiers in Molecular Biosciences",
+      "volume": "9",
+      "doi": "10.3389/fmolb.2022.869601",
+      "note": "(#co-corresponding author)"
+    },
+    {
+      "authors": "Yang, X., *Yu, H., Duncan, S., Zhang, Y., Cheema, J., Liu, H., Benjamin Miller, J., Zhang, J., Kwok, C. K., Zhang, H., & Ding, Y.",
+      "year": "2022",
+      "title": "RNA G-quadruplex structure contributes to cold adaptation in plants.",
+      "journal": "Nature Communications",
+      "volume": "13(1)",
+      "pages": "6224",
+      "doi": "10.1038/s41467-022-34040-y",
+      "note": "(*co-first author)"
+    },
+    {
+      "authors": "Yang, X., *Yu, H., Sun, W., Ding, L., Li, J., Cheema, J., Ramirez-Gonzalez, R., Zhao, X., Martín, A. C., Lu, F., Liu, B., Uauy, C., Ding, Y., & Zhang, H.",
+      "year": "2021",
+      "title": "Wheat in vivo RNA structure landscape reveals a prevalent role of RNA structure in modulating translational subgenome expression asymmetry.",
+      "journal": "Genome Biology",
+      "volume": "22(1)",
+      "pages": "326",
+      "doi": "10.1186/s13059-021-02549-y",
+      "note": "(*co-first author)"
+    },
+    {
+      "authors": "Wu, Z., Zhang, Y., Yu, H., Pan, D., Wang, Y., Wang, Y., Li, F., Liu, C., Nan, H., Chen, W., & Ji, Q.",
+      "year": "2021",
+      "title": "Programmed genome editing by a miniature CRISPR-Cas12f nuclease.",
+      "journal": "Nature Chemical Biology",
+      "volume": "17(11)",
+      "pages": "1132–1138",
+      "doi": "10.1038/s41589-021-00868-6"
+    },
+    {
+      "authors": "Yu, H., Wu, Z., Chen, X., Ji, Q., & Tao, S.",
+      "year": "2020",
+      "title": "CRISPR-CBEI: A Designing and Analyzing Tool Kit for Cytosine Base Editor-Mediated Gene Inactivation.",
+      "journal": "mSystems",
+      "volume": "5(5)",
+      "pages": "Article 5",
+      "doi": "10/ghcq5s"
+    },
+    {
+      "authors": "Yu, H., Zhang, Y., Sun, Q., Gao, H., & Tao, S.",
+      "year": "2020",
+      "title": "RSVdb: A comprehensive database of transcriptome RNA structure.",
+      "journal": "Briefings in Bioinformatics",
+      "doi": "10.1093/bib/bbaa071"
+    },
+    {
+      "authors": "Yu, H., Meng, W., Mao, Y., Zhang, Y., Sun, Q., & Tao, S.",
+      "year": "2019",
+      "title": "Deciphering the rules of mRNA structure differentiation in Saccharomyces cerevisiae in vivo and in vitro with deep neural networks.",
+      "journal": "RNA Biology",
+      "volume": "16(8)",
+      "pages": "Article 8",
+      "doi": "10.1080/15476286.2019.1612692"
+    }
+  ]
+}
