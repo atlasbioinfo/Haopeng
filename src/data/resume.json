@@ -296,19 +296,34 @@
   ],
   "publications": [
     {
+      "authors": "*Yu, H., Zhou, S., Huang, M., Ding, L., Chen, Y., Wang, Y., ... & Li, K.",
+      "year": "2025",
+      "title": "PlantScience.ai: An LLM-Powered Virtual Scientist for Plant Science.",
+      "journal": "bioRxiv",
+      "doi": "https://doi.org/10.1101/2025.10.24.684337",
+      "note": "(*co-first author)"
+    },
+    {
+      "authors": "Balch, S., Sekne, Z., Franco-Echevarría, E., Ludzia, P., Kretsch, R. C., Sun, W., Yu, H., ... & Nguyen, T. H. D.",
+      "year": "2025",
+      "title": "Cryo-EM structure of human telomerase dimer reveals H/ACA RNP-mediated dimerization.",
+      "journal": "Science",
+      "doi": "https://doi.org/10.1126/science.adr5817"
+    },
+    {
       "authors": "*Yu, H., Yang, H., Sun, W., Yan, Z., Yang, X., Zhang, H., ... & Li, K.",
       "year": "2024",
       "title": "An interpretable RNA foundation model for exploring functional RNA motifs in plants.",
       "journal": "Nature Machine Intelligence",
-      "doi": "10.1038/s42256-024-00946-z",
+      "doi": "https://doi.org/10.1038/s42256-024-00946-z",
       "note": "(*co-first author)"
     },
     {
       "authors": "Wu, H., *Yu, H., Zhang Y., Yang B., Sun W., Li Q., Liu B., Ding Y., Zhang H.",
       "year": "2024",
       "title": "Unveiling RNA Structure-mediated Regulations of RNA Stability in Wheat.",
-      "journal": "Nature Communication",
-      "doi": "10.1038/s41467-024-54172-7",
+      "journal": "Nature Communications",
+      "doi": "https://doi.org/10.1038/s41467-024-54172-7",
       "note": "(*co-first author)"
     },
     {
@@ -316,7 +331,7 @@
       "year": "2024",
       "title": "iM-Seeker: A Webserver for DNA i-Motifs Prediction and Scoring via Automated Machine Learning.",
       "journal": "Nucleic Acids Research",
-      "doi": "10.1093/nar/gkae315",
+      "doi": "https://doi.org/10.1093/nar/gkae315",
       "note": "(#co-corresponding and co-first author)"
     },
     {
@@ -324,18 +339,31 @@
       "year": "2024",
       "title": "Prediction of DNA i-motifs via machine learning.",
       "journal": "Nucleic Acids Research",
-      "doi": "10.1093/nar/gkae092",
+      "doi": "https://doi.org/10.1093/nar/gkae092",
       "note": "(#co-corresponding and co-first author)"
+    },
+    {
+      "authors": "Zhang, Y., Dong, Q., Wang, Z., Liu, Q., Yu, H., Sun, W., ... & Zhang, H.",
+      "year": "2024",
+      "title": "A fine-scale Arabidopsis chromatin landscape reveals chromatin conformation-associated transcriptional dynamics.",
+      "journal": "Nature Communications",
+      "doi": "https://doi.org/10.1038/s41467-024-47678-7"
+    },
+    {
+      "authors": "Wu, Z., Liu, D., Pan, D., Yu, H., Shi, J., Ma, J., ... & Ji, Q.",
+      "year": "2023",
+      "title": "Structure and engineering of miniature Acidibacillus sulfuroxidans Cas12f1.",
+      "journal": "Nature Catalysis",
+      "doi": "https://doi.org/10.1038/s41929-023-00995-4"
     },
     {
       "authors": "#Yu, H., Qi, Y., Yang, B., Yang, X., & Ding, Y.",
       "year": "2023",
       "title": "G4Atlas: A comprehensive transcriptome-wide G-quadruplex database.",
       "journal": "Nucleic Acids Research",
-      "volume": "51(D1)",
-      "pages": "D126–D134",
-      "doi": "10.1093/nar/gkac896",
-      "note": "(*co-corresponding author)"
+      "volume": "51(D1), D126–D134",
+      "doi": "https://doi.org/10.1093/nar/gkac896",
+      "note": "(#co-corresponding author)"
     },
     {
       "authors": "#Yu, H., Qi, Y., & Ding, Y.",
@@ -343,17 +371,30 @@
       "title": "Deep Learning in RNA Structure Studies.",
       "journal": "Frontiers in Molecular Biosciences",
       "volume": "9",
-      "doi": "10.3389/fmolb.2022.869601",
+      "doi": "https://doi.org/10.3389/fmolb.2022.869601",
       "note": "(#co-corresponding author)"
+    },
+    {
+      "authors": "Wang, Y., Wang, Y., Pan, D., Yu, H., Zhang, Y., Chen, W., ... & Ji, Q.",
+      "year": "2022",
+      "title": "Guide RNA engineering enables efficient CRISPR editing with a miniature Syntrophomonas palmitatica Cas12f1 nuclease.",
+      "journal": "Cell Reports",
+      "doi": "https://doi.org/10.1016/j.celrep.2022.111418"
+    },
+    {
+      "authors": "Zheng, S., Dong, J., Lu, J., Li, J., Jiang, D., Yu, H., ... & Zhuang, C.",
+      "year": "2022",
+      "title": "A cytosolic pentatricopeptide repeat protein is essential for tapetal plastid development by regulating OsGLK1 transcript levels in rice.",
+      "journal": "New Phytologist",
+      "doi": "https://doi.org/10.1111/nph.18105"
     },
     {
       "authors": "Yang, X., *Yu, H., Duncan, S., Zhang, Y., Cheema, J., Liu, H., Benjamin Miller, J., Zhang, J., Kwok, C. K., Zhang, H., & Ding, Y.",
       "year": "2022",
       "title": "RNA G-quadruplex structure contributes to cold adaptation in plants.",
       "journal": "Nature Communications",
-      "volume": "13(1)",
-      "pages": "6224",
-      "doi": "10.1038/s41467-022-34040-y",
+      "volume": "13(1), 6224",
+      "doi": "https://doi.org/10.1038/s41467-022-34040-y",
       "note": "(*co-first author)"
     },
     {
@@ -361,9 +402,8 @@
       "year": "2021",
       "title": "Wheat in vivo RNA structure landscape reveals a prevalent role of RNA structure in modulating translational subgenome expression asymmetry.",
       "journal": "Genome Biology",
-      "volume": "22(1)",
-      "pages": "326",
-      "doi": "10.1186/s13059-021-02549-y",
+      "volume": "22(1), 326",
+      "doi": "https://doi.org/10.1186/s13059-021-02549-y",
       "note": "(*co-first author)"
     },
     {
@@ -371,34 +411,31 @@
       "year": "2021",
       "title": "Programmed genome editing by a miniature CRISPR-Cas12f nuclease.",
       "journal": "Nature Chemical Biology",
-      "volume": "17(11)",
-      "pages": "1132–1138",
-      "doi": "10.1038/s41589-021-00868-6"
+      "volume": "17(11), 1132–1138",
+      "doi": "https://doi.org/10.1038/s41589-021-00868-6"
     },
     {
       "authors": "Yu, H., Wu, Z., Chen, X., Ji, Q., & Tao, S.",
       "year": "2020",
       "title": "CRISPR-CBEI: A Designing and Analyzing Tool Kit for Cytosine Base Editor-Mediated Gene Inactivation.",
       "journal": "mSystems",
-      "volume": "5(5)",
-      "pages": "Article 5",
-      "doi": "10/ghcq5s"
+      "volume": "5(5), Article 5",
+      "doi": "https://doi.org/10/ghcq5s"
     },
     {
       "authors": "Yu, H., Zhang, Y., Sun, Q., Gao, H., & Tao, S.",
       "year": "2020",
       "title": "RSVdb: A comprehensive database of transcriptome RNA structure.",
       "journal": "Briefings in Bioinformatics",
-      "doi": "10.1093/bib/bbaa071"
+      "doi": "https://doi.org/10.1093/bib/bbaa071"
     },
     {
       "authors": "Yu, H., Meng, W., Mao, Y., Zhang, Y., Sun, Q., & Tao, S.",
       "year": "2019",
       "title": "Deciphering the rules of mRNA structure differentiation in Saccharomyces cerevisiae in vivo and in vitro with deep neural networks.",
       "journal": "RNA Biology",
-      "volume": "16(8)",
-      "pages": "Article 8",
-      "doi": "10.1080/15476286.2019.1612692"
+      "volume": "16(8), Article 8",
+      "doi": "https://doi.org/10.1080/15476286.2019.1612692"
     }
   ]
 }
