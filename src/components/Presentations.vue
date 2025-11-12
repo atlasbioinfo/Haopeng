@@ -2,11 +2,14 @@
   <section class="section">
     <h2 class="section-title">{{ lang === 'en' ? 'Selected Presentations' : '主要学术报告' }}</h2>
 
-    <div class="presentation-grid">
-      <div v-for="(item, index) in data" :key="index" class="presentation-item">
-        <span class="pres-year">{{ item.year }}</span>
-        <span class="pres-type" :class="item.type.toLowerCase()">{{ item.type }}</span>
-        <p>{{ item.title[lang] }}</p>
+    <div class="presentations-timeline-vertical">
+      <div v-for="(item, index) in data" :key="index" class="presentation-item-vertical">
+        <div class="pres-year-vertical">{{ item.year }}</div>
+        <div class="pres-marker-vertical"></div>
+        <div class="pres-content-vertical">
+          <span class="pres-type-badge" :class="item.type.toLowerCase()">{{ item.type }}</span>
+          <p class="pres-title">{{ item.title[lang] }}</p>
+        </div>
       </div>
     </div>
   </section>
@@ -24,3 +27,135 @@ defineProps({
   }
 })
 </script>
+
+<style scoped>
+/* Presentations Vertical Timeline */
+.section-title {
+  font-family: 'Crimson Text', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 32px 0;
+  padding-bottom: 16px;
+  border-bottom: 3px solid #2563eb;
+}
+
+.presentations-timeline-vertical {
+  position: relative;
+  padding: 32px 0 32px 80px;
+}
+
+.presentations-timeline-vertical::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #667eea, #764ba2, #667eea);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(102, 126, 234, 0.3);
+}
+
+.presentation-item-vertical {
+  position: relative;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: 120px auto;
+  gap: 32px;
+  align-items: start;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.presentation-item-vertical:hover {
+  transform: translateX(8px);
+}
+
+.pres-year-vertical {
+  position: absolute;
+  left: -52px;
+  top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #764ba2;
+  background: var(--bg-primary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 2px solid #764ba2;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(118, 75, 162, 0.15);
+  z-index: 2;
+}
+
+.pres-marker-vertical {
+  position: absolute;
+  left: -52px;
+  top: 16px;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: 4px solid var(--bg-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.15), 0 2px 8px rgba(118, 75, 162, 0.3);
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.presentation-item-vertical:hover .pres-marker-vertical {
+  transform: scale(1.3);
+  background: linear-gradient(135deg, #764ba2, #9f7aea);
+  box-shadow: 0 0 0 6px rgba(118, 75, 162, 0.2), 0 4px 12px rgba(118, 75, 162, 0.4);
+}
+
+.pres-content-vertical {
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.presentation-item-vertical:hover .pres-content-vertical {
+  border-color: #764ba2;
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+}
+
+.pres-type-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.pres-type-badge.oral {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.pres-type-badge.poster {
+  background: linear-gradient(135deg, #06b6d4, #2563eb);
+  color: white;
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+}
+
+.presentation-item-vertical:hover .pres-type-badge {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.pres-title {
+  font-size: 15px;
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin: 0;
+  font-weight: 500;
+}
+</style>

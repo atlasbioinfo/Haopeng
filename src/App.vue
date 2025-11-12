@@ -5,12 +5,12 @@
       <n-layout-header bordered class="top-nav">
         <div class="nav-content">
           <div class="nav-links">
-            <a href="#education" class="nav-link">Education</a>
-            <a href="#employment" class="nav-link">Employment</a>
-            <a href="#grants" class="nav-link">Grants</a>
-            <a href="#awards" class="nav-link">Awards</a>
-            <a href="#presentations" class="nav-link">Presentations</a>
-            <a href="#publications" class="nav-link">Publications</a>
+            <a @click="scrollToSection('education')" class="nav-link">Education</a>
+            <a @click="scrollToSection('employment')" class="nav-link">Employment</a>
+            <a @click="scrollToSection('grants')" class="nav-link">Grants</a>
+            <a @click="scrollToSection('awards')" class="nav-link">Awards</a>
+            <a @click="scrollToSection('presentations')" class="nav-link">Presentations</a>
+            <a @click="scrollToSection('publications')" class="nav-link">Publications</a>
           </div>
           <div class="nav-controls">
             <n-button
@@ -55,7 +55,7 @@
         </aside>
 
         <!-- Right Scrollable Content -->
-        <main class="right-content-panel">
+        <main class="right-content-panel" ref="contentPanel">
           <!-- Education & Employment Section -->
           <section id="education-employment" class="content-section">
             <div class="two-column-layout">
@@ -85,32 +85,30 @@
             <Presentations :data="resumeData.presentations" :lang="currentLang" />
           </section>
 
-          <!-- Publications Section with Horizontal Timeline -->
+          <!-- Publications Section with Vertical Timeline -->
           <section id="publications" class="content-section">
             <h2 class="section-title">
               {{ currentLang === 'en' ? 'Publications' : '学术出版物' }}
             </h2>
-            <div class="publications-timeline">
-              <div class="timeline-track">
-                <div
-                  v-for="(pub, index) in resumeData.publications"
-                  :key="index"
-                  class="publication-card"
-                  @click="selectedPublication = selectedPublication === index ? null : index"
-                  :class="{ expanded: selectedPublication === index }"
-                >
-                  <div class="pub-year">{{ pub.year }}</div>
-                  <div class="pub-marker"></div>
-                  <div class="pub-content">
-                    <h4 class="pub-title">{{ pub.title }}</h4>
-                    <p class="pub-authors">{{ pub.authors }}</p>
-                    <div v-if="selectedPublication === index" class="pub-details">
-                      <p class="pub-journal"><strong>{{ pub.journal }}</strong></p>
-                      <p class="pub-volume">{{ pub.volume }}</p>
-                      <a v-if="pub.doi" :href="pub.doi" target="_blank" class="pub-doi">
-                        DOI: {{ pub.doi.replace('https://doi.org/', '') }}
-                      </a>
-                    </div>
+            <div class="publications-timeline-vertical">
+              <div
+                v-for="(pub, index) in resumeData.publications"
+                :key="index"
+                class="publication-item-vertical"
+                @click="selectedPublication = selectedPublication === index ? null : index"
+                :class="{ expanded: selectedPublication === index }"
+              >
+                <div class="pub-year-vertical">{{ pub.year }}</div>
+                <div class="pub-marker-vertical"></div>
+                <div class="pub-content-vertical">
+                  <h4 class="pub-title-vertical">{{ pub.title }}</h4>
+                  <p class="pub-authors-vertical">{{ pub.authors }}</p>
+                  <div v-if="selectedPublication === index" class="pub-details-vertical">
+                    <p class="pub-journal-vertical"><strong>{{ pub.journal }}</strong></p>
+                    <p class="pub-volume-vertical">{{ pub.volume }}</p>
+                    <a v-if="pub.doi" :href="pub.doi" target="_blank" class="pub-doi-vertical">
+                      DOI: {{ pub.doi.replace('https://doi.org/', '') }}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -156,6 +154,7 @@ import Presentations from './components/Presentations.vue'
 const currentLang = ref('en')
 const isDark = ref(false)
 const selectedPublication = ref(null)
+const contentPanel = ref(null)
 
 // Theme
 const themeOverrides = {
@@ -173,6 +172,17 @@ const toggleLanguage = () => {
 
 const toggleTheme = () => {
   isDark.value = !isDark.value
+}
+
+const scrollToSection = (sectionId) => {
+  const section = document.getElementById(sectionId)
+  if (section && contentPanel.value) {
+    const offset = section.offsetTop - contentPanel.value.offsetTop
+    contentPanel.value.scrollTo({
+      top: offset,
+      behavior: 'smooth'
+    })
+  }
 }
 </script>
 
@@ -232,9 +242,10 @@ const toggleTheme = () => {
   text-decoration: none;
   font-weight: 500;
   font-size: 14px;
-  transition: color 0.2s;
+  transition: all 0.2s;
   padding: 8px 12px;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .nav-link:hover {
@@ -353,156 +364,183 @@ const toggleTheme = () => {
   min-width: 0;
 }
 
-/* Publications Timeline */
-.publications-timeline {
+/* Publications Vertical Timeline */
+.publications-timeline-vertical {
   position: relative;
-  padding: 32px 0;
+  padding: 32px 0 32px 80px;
 }
 
-.timeline-track {
-  display: flex;
-  gap: 24px;
-  overflow-x: auto;
-  padding: 24px 8px 32px 8px;
-  position: relative;
-  scroll-snap-type: x mandatory;
-}
-
-.timeline-track::before {
+.publications-timeline-vertical::before {
   content: '';
   position: absolute;
-  top: 80px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(to right, #2563eb, #3b82f6, #60a5fa);
-  z-index: 0;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #2563eb, #3b82f6, #60a5fa, #818cf8);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
 }
 
-.publication-card {
+.publication-item-vertical {
   position: relative;
-  min-width: 320px;
-  max-width: 320px;
+  margin-bottom: 48px;
+  display: grid;
+  grid-template-columns: 120px auto;
+  gap: 32px;
+  align-items: start;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.publication-item-vertical:hover {
+  transform: translateX(8px);
+}
+
+.pub-year-vertical {
+  position: absolute;
+  left: -52px;
+  top: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2563eb;
+  background: var(--bg-primary);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 2px solid #2563eb;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+  z-index: 2;
+}
+
+.pub-marker-vertical {
+  position: absolute;
+  left: -52px;
+  top: 16px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border: 4px solid var(--bg-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15), 0 2px 8px rgba(37, 99, 235, 0.3);
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.publication-item-vertical:hover .pub-marker-vertical {
+  transform: scale(1.3);
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.2), 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.publication-item-vertical.expanded .pub-marker-vertical {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.25), 0 4px 16px rgba(102, 126, 234, 0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.25), 0 4px 16px rgba(102, 126, 234, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(102, 126, 234, 0.15), 0 4px 20px rgba(102, 126, 234, 0.6);
+  }
+}
+
+.pub-content-vertical {
   background: var(--bg-primary);
   border: 2px solid var(--border-color);
   border-radius: 16px;
   padding: 24px;
-  cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  scroll-snap-align: start;
-  z-index: 1;
+  box-shadow: var(--shadow-sm);
 }
 
-.publication-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
+.publication-item-vertical:hover .pub-content-vertical {
   border-color: #2563eb;
+  box-shadow: var(--shadow-md);
+  background: var(--bg-secondary);
 }
 
-.publication-card.expanded {
-  min-width: 400px;
-  max-width: 400px;
+.publication-item-vertical.expanded .pub-content-vertical {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
   border-color: transparent;
+  box-shadow: var(--shadow-lg);
 }
 
-.publication-card.expanded .pub-year,
-.publication-card.expanded .pub-title,
-.publication-card.expanded .pub-authors {
-  color: white;
-}
-
-.pub-year {
-  position: absolute;
-  top: -32px;
-  left: 50%;
-  transform: translateX(-50%);
+.pub-title-vertical {
+  font-family: 'Crimson Text', serif;
   font-size: 18px;
   font-weight: 700;
-  color: #2563eb;
-  background: var(--bg-primary);
-  padding: 4px 16px;
-  border-radius: 20px;
-  border: 2px solid #2563eb;
-  white-space: nowrap;
-}
-
-.pub-marker {
-  position: absolute;
-  top: 56px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 16px;
-  height: 16px;
-  background: #2563eb;
-  border: 4px solid var(--bg-primary);
-  border-radius: 50%;
-  z-index: 2;
-}
-
-.publication-card.expanded .pub-marker {
-  width: 20px;
-  height: 20px;
-  background: white;
-  border-color: #667eea;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
-}
-
-.pub-content {
-  margin-top: 24px;
-}
-
-.pub-title {
-  font-size: 16px;
-  font-weight: 600;
   color: var(--text-primary);
-  margin: 0 0 8px 0;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.publication-card.expanded .pub-title {
-  -webkit-line-clamp: unset;
-}
-
-.pub-authors {
-  font-size: 13px;
-  color: var(--text-muted);
   margin: 0 0 12px 0;
   line-height: 1.5;
+  transition: color 0.3s;
 }
 
-.pub-details {
+.publication-item-vertical.expanded .pub-title-vertical {
+  color: white;
+}
+
+.pub-authors-vertical {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 12px 0;
+  line-height: 1.6;
+  transition: color 0.3s;
+}
+
+.publication-item-vertical.expanded .pub-authors-vertical {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.pub-details-vertical {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+  animation: slideDown 0.3s ease;
 }
 
-.pub-journal,
-.pub-volume {
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pub-journal-vertical,
+.pub-volume-vertical {
   font-size: 14px;
   margin: 8px 0;
-  opacity: 0.95;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
 }
 
-.pub-doi {
+.pub-doi-vertical {
   display: inline-block;
-  margin-top: 8px;
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
   color: white;
   text-decoration: none;
   font-size: 13px;
-  transition: background 0.2s;
+  font-weight: 600;
+  transition: all 0.2s;
+  backdrop-filter: blur(10px);
 }
 
-.pub-doi:hover {
-  background: rgba(255, 255, 255, 0.3);
+.pub-doi-vertical:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Footer */
@@ -528,25 +566,6 @@ const toggleTheme = () => {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Scrollbar Styling */
-.timeline-track::-webkit-scrollbar {
-  height: 8px;
-}
-
-.timeline-track::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-  border-radius: 4px;
-}
-
-.timeline-track::-webkit-scrollbar-thumb {
-  background: #2563eb;
-  border-radius: 4px;
-}
-
-.timeline-track::-webkit-scrollbar-thumb:hover {
-  background: #1d4ed8;
 }
 
 /* Responsive Design */
