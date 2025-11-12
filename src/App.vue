@@ -337,14 +337,37 @@ const handleScroll = () => {
   right: 0;
   bottom: 0;
   background:
+    /* Subtle hexagon pattern */
+    radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.02) 2px, transparent 2px),
+    radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.02) 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.02) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.02) 2px, transparent 2px),
+    /* Main neural glow */
     radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
-  animation: aiGlow 8s ease-in-out infinite;
+  background-size:
+    60px 60px,
+    60px 60px,
+    60px 60px,
+    60px 60px,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  animation: aiGlow 8s ease-in-out infinite, floatingDots 20s linear infinite;
   z-index: 0;
 }
 
-/* AI Grid Pattern */
+@keyframes floatingDots {
+  0% {
+    background-position: 0 0, 15px 15px, 30px 30px, 45px 45px, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 60px 60px, 75px 75px, 90px 90px, 105px 105px, 0 0, 0 0, 0 0;
+  }
+}
+
+/* AI Grid Pattern with Circuit Lines */
 .left-fixed-panel::after {
   content: '';
   position: absolute;
@@ -353,11 +376,31 @@ const handleScroll = () => {
   right: 0;
   bottom: 0;
   background-image:
+    /* Diagonal tech lines */
+    linear-gradient(45deg, transparent 48%, rgba(14, 165, 233, 0.015) 48%, rgba(14, 165, 233, 0.015) 52%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(139, 92, 246, 0.015) 48%, rgba(139, 92, 246, 0.015) 52%, transparent 52%),
+    /* Main grid */
     linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
-  animation: gridMove 20s linear infinite;
+    linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+    /* Circuit board dots at intersections */
+    radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    30px 30px,
+    30px 30px,
+    30px 30px;
+  animation: gridMove 20s linear infinite, circuitPulse 4s ease-in-out infinite;
   z-index: 0;
+}
+
+@keyframes circuitPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 @keyframes aiGlow {
@@ -383,6 +426,42 @@ const handleScroll = () => {
   max-width: 360px;
   position: relative;
   z-index: 1;
+}
+
+/* Scan line effect */
+.profile-section::before {
+  content: '';
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(14, 165, 233, 0.3) 20%,
+    rgba(139, 92, 246, 0.5) 50%,
+    rgba(236, 72, 153, 0.3) 80%,
+    transparent 100%);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+  animation: scanLine 8s ease-in-out infinite;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+@keyframes scanLine {
+  0%, 100% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  50% {
+    top: 100%;
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0;
+  }
 }
 
 .photo-wrapper {
@@ -472,6 +551,29 @@ const handleScroll = () => {
   color: var(--text-secondary);
   line-height: 1.7;
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--accent-primary);
+  width: fit-content;
+  animation: typing 3.5s steps(60, end), blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--accent-primary);
+  }
 }
 
 /* Right Content Panel */
