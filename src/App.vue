@@ -108,7 +108,6 @@
                     </svg>
                     DOI: {{ pub.doi.replace('https://doi.org/', '') }}
                   </a>
-                  <span v-if="pub.note" class="pub-note">{{ pub.note }}</span>
                 </div>
               </div>
             </div>
@@ -326,11 +325,64 @@ const handleScroll = () => {
   flex-shrink: 0;
   border-right: 1px solid var(--border-color);
   background: var(--bg-primary);
+  overflow: hidden;
+}
+
+/* AI Neural Network Background */
+.left-fixed-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+  animation: aiGlow 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* AI Grid Pattern */
+.left-fixed-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: gridMove 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes aiGlow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(30px, 30px);
+  }
 }
 
 .profile-section {
   text-align: center;
   max-width: 360px;
+  position: relative;
+  z-index: 1;
 }
 
 .photo-wrapper {
@@ -341,12 +393,47 @@ const handleScroll = () => {
   overflow: hidden;
   border: 6px solid var(--bg-secondary);
   box-shadow: var(--shadow-lg);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.photo-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg,
+    var(--accent-primary),
+    var(--accent-secondary),
+    var(--accent-tertiary),
+    var(--accent-primary));
+  background-size: 300% 300%;
+  animation: aiGradient 4s ease infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-wrapper:hover::before {
+  opacity: 0.6;
 }
 
 .photo-wrapper:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 12px 32px rgba(14, 165, 233, 0.3),
+              0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+@keyframes aiGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .profile-photo {
@@ -360,16 +447,24 @@ const handleScroll = () => {
   font-family: 'Crimson Text', serif;
   font-size: 38px;
   font-weight: 700;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0 0 12px 0;
   letter-spacing: -0.02em;
+  position: relative;
 }
 
 .profile-title {
   font-size: 18px;
   font-weight: 600;
-  color: #2563eb;
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0 0 16px 0;
+  position: relative;
 }
 
 .profile-subtitle {
