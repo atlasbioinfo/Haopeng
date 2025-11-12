@@ -51,7 +51,7 @@
         </aside>
 
         <!-- Right Scrollable Content -->
-        <main class="right-content-panel" ref="contentPanel" @scroll="handleScroll" @wheel="handleWheel">
+        <main class="right-content-panel" ref="contentPanel" @scroll="handleScroll">
           <!-- Education & Employment Section -->
           <section id="education-employment" class="content-section">
             <div class="two-column-layout">
@@ -81,31 +81,34 @@
             <Presentations :data="resumeData.presentations" :lang="currentLang" />
           </section>
 
-          <!-- Publications Section with Vertical Timeline -->
+          <!-- Publications Section -->
           <section id="publications" class="content-section">
             <h2 class="section-title">
               {{ currentLang === 'en' ? 'Publications' : '学术出版物' }}
             </h2>
-            <div class="publications-timeline-vertical">
+            <div class="publications-list">
               <div
                 v-for="(pub, index) in resumeData.publications"
                 :key="index"
-                class="publication-item-vertical"
-                @click="selectedPublication = selectedPublication === index ? null : index"
-                :class="{ expanded: selectedPublication === index }"
+                class="publication-item"
               >
-                <div class="pub-year-vertical">{{ pub.year }}</div>
-                <div class="pub-marker-vertical"></div>
-                <div class="pub-content-vertical">
-                  <h4 class="pub-title-vertical">{{ pub.title }}</h4>
-                  <p class="pub-authors-vertical">{{ pub.authors }}</p>
-                  <div v-if="selectedPublication === index" class="pub-details-vertical">
-                    <p class="pub-journal-vertical"><strong>{{ pub.journal }}</strong></p>
-                    <p class="pub-volume-vertical">{{ pub.volume }}</p>
-                    <a v-if="pub.doi" :href="pub.doi" target="_blank" class="pub-doi-vertical">
-                      DOI: {{ pub.doi.replace('https://doi.org/', '') }}
-                    </a>
-                  </div>
+                <div class="pub-year-badge">{{ pub.year }}</div>
+                <div class="pub-content">
+                  <h4 class="pub-title">{{ pub.title }}</h4>
+                  <p class="pub-authors">{{ pub.authors }}</p>
+                  <p class="pub-journal">
+                    <strong>{{ pub.journal }}</strong>
+                    <span v-if="pub.volume"> · {{ pub.volume }}</span>
+                  </p>
+                  <a v-if="pub.doi" :href="pub.doi" target="_blank" class="pub-doi-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    DOI: {{ pub.doi.replace('https://doi.org/', '') }}
+                  </a>
+                  <span v-if="pub.note" class="pub-note">{{ pub.note }}</span>
                 </div>
               </div>
             </div>
@@ -201,14 +204,6 @@ const handleScroll = () => {
         break
       }
     }
-  }
-}
-
-const handleWheel = (event) => {
-  // Forward wheel events to content panel
-  if (contentPanel.value) {
-    event.preventDefault()
-    contentPanel.value.scrollTop += event.deltaY
   }
 }
 </script>
@@ -422,224 +417,100 @@ const handleWheel = (event) => {
   min-width: 0;
 }
 
-/* Publications Horizontal Timeline */
-.publications-timeline-vertical {
-  position: relative;
-  padding: 40px 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  cursor: grab;
+/* Publications List */
+.publications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.publications-timeline-vertical:active {
-  cursor: grabbing;
-}
-
-.publications-timeline-vertical::-webkit-scrollbar {
-  height: 8px;
-}
-
-.publications-timeline-vertical::-webkit-scrollbar-track {
+.publication-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 24px;
+  padding: 24px;
   background: var(--bg-secondary);
-  border-radius: 4px;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent-primary);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
 }
 
-.publications-timeline-vertical::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 4px;
+.publication-item:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-primary);
+  border-left-width: 6px;
 }
 
-.publications-timeline-vertical::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-secondary);
-}
-
-.publications-timeline-vertical::before {
-  content: '';
-  position: absolute;
-  top: 80px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
-  border-radius: 2px;
-  box-shadow: 0 0 12px rgba(14, 165, 233, 0.3);
-}
-
-.publication-item-vertical {
-  display: inline-block;
-  position: relative;
-  width: 320px;
-  margin-right: 24px;
-  margin-bottom: 32px;
-  vertical-align: top;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.publication-item-vertical:hover {
-  transform: translateY(-8px);
-}
-
-.pub-year-vertical {
-  position: absolute;
-  top: -32px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 15px;
+.pub-year-badge {
+  font-size: 18px;
   font-weight: 700;
   color: var(--accent-primary);
-  background: var(--bg-primary);
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: 2px solid var(--accent-primary);
-  white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15);
-  z-index: 2;
+  text-align: center;
+  padding-top: 4px;
 }
 
-.pub-marker-vertical {
-  position: absolute;
-  top: 56px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 18px;
-  height: 18px;
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-  border: 4px solid var(--bg-primary);
-  border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15), 0 2px 8px rgba(14, 165, 233, 0.3);
-  z-index: 3;
-  transition: all 0.3s ease;
+.pub-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.publication-item-vertical:hover .pub-marker-vertical {
-  transform: translateX(-50%) scale(1.3);
-  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
-  box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.2), 0 2px 8px rgba(14, 165, 233, 0.4);
-}
-
-.publication-item-vertical.expanded .pub-marker-vertical {
-  width: 22px;
-  height: 22px;
-  background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-secondary));
-  box-shadow: 0 0 0 8px rgba(236, 72, 153, 0.25), 0 4px 16px rgba(236, 72, 153, 0.5);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 8px rgba(236, 72, 153, 0.25), 0 4px 16px rgba(236, 72, 153, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 0 12px rgba(236, 72, 153, 0.15), 0 4px 20px rgba(236, 72, 153, 0.6);
-  }
-}
-
-.pub-content-vertical {
-  background: var(--bg-primary);
-  border: 2px solid var(--border-color);
-  border-radius: 16px;
-  padding: 24px;
-  margin-top: 72px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-sm);
-  height: 100%;
-  min-height: 200px;
-}
-
-.publication-item-vertical:hover .pub-content-vertical {
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-md);
-  background: var(--bg-secondary);
-}
-
-.publication-item-vertical.expanded {
-  width: 400px;
-}
-
-.publication-item-vertical.expanded .pub-content-vertical {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  border-color: transparent;
-  box-shadow: var(--shadow-lg);
-  min-height: 280px;
-}
-
-.pub-title-vertical {
+.pub-title {
   font-family: 'Crimson Text', serif;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 0 0 12px 0;
+  margin: 0;
   line-height: 1.5;
-  transition: color 0.3s;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
-.publication-item-vertical.expanded .pub-title-vertical {
-  color: white;
-  -webkit-line-clamp: unset;
-}
-
-.pub-authors-vertical {
-  font-size: 13px;
+.pub-authors {
+  font-size: 14px;
   color: var(--text-secondary);
-  margin: 0 0 12px 0;
-  line-height: 1.6;
-  transition: color 0.3s;
-}
-
-.publication-item-vertical.expanded .pub-authors-vertical {
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.pub-details-vertical {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 2px solid rgba(255, 255, 255, 0.3);
-  animation: slideDown 0.3s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.pub-journal-vertical,
-.pub-volume-vertical {
-  font-size: 13px;
-  margin: 8px 0;
-  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
   line-height: 1.6;
 }
 
-.pub-doi-vertical {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
-  font-size: 12px;
+.pub-journal {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 4px 0;
+}
+
+.pub-journal strong {
+  color: var(--text-primary);
   font-weight: 600;
-  transition: all 0.2s;
-  backdrop-filter: blur(10px);
 }
 
-.pub-doi-vertical:hover {
-  background: rgba(255, 255, 255, 0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.pub-doi-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+  margin-top: 4px;
+}
+
+.pub-doi-link:hover {
+  color: var(--accent-secondary);
+  transform: translateX(4px);
+}
+
+.pub-doi-link svg {
+  flex-shrink: 0;
+}
+
+.pub-note {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--accent-tertiary);
+  font-weight: 600;
+  margin-top: 4px;
 }
 
 /* Footer */
