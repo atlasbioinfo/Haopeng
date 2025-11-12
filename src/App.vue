@@ -1,6 +1,6 @@
 <template>
   <n-config-provider :theme="isDark ? darkTheme : null" :theme-overrides="themeOverrides">
-    <n-layout style="min-height: 100vh;" :class="{ 'dark-mode': isDark }">
+    <n-layout style="height: 100vh; overflow: hidden;" :class="{ 'dark-mode': isDark }">
       <!-- Top Navigation Bar -->
       <n-layout-header bordered class="top-nav">
         <div class="nav-content">
@@ -13,16 +13,12 @@
             <a @click="scrollToSection('publications')" class="nav-link" :class="{ active: activeSection === 'publications' }">Publications</a>
           </div>
           <div class="nav-controls">
-            <n-button
-              quaternary
-              circle
-              @click="toggleLanguage"
-              :title="currentLang === 'en' ? '切换到中文' : 'Switch to English'"
-            >
-              <template #icon>
-                <n-icon><globe-outline /></n-icon>
-              </template>
-            </n-button>
+            <n-select
+              v-model:value="currentLang"
+              :options="languageOptions"
+              size="small"
+              style="width: 120px;"
+            />
             <n-button
               quaternary
               circle
@@ -55,7 +51,7 @@
         </aside>
 
         <!-- Right Scrollable Content -->
-        <main class="right-content-panel" ref="contentPanel" @scroll="handleScroll">
+        <main class="right-content-panel" ref="contentPanel" @scroll="handleScroll" @wheel="handleWheel">
           <!-- Education & Employment Section -->
           <section id="education-employment" class="content-section">
             <div class="two-column-layout">
@@ -114,15 +110,15 @@
               </div>
             </div>
           </section>
+
+          <!-- Footer -->
+          <footer class="content-footer">
+            <p>
+              {{ currentLang === 'en' ? '© 2025 Haopeng Yu. All rights reserved.' : '© 2025 余浩鹏. 版权所有.' }}
+            </p>
+          </footer>
         </main>
       </div>
-
-      <!-- Footer -->
-      <footer class="content-footer">
-        <p>
-          {{ currentLang === 'en' ? '© 2025 Haopeng Yu. All rights reserved.' : '© 2025 余浩鹏. 版权所有.' }}
-        </p>
-      </footer>
     </n-layout>
   </n-config-provider>
 </template>
@@ -135,10 +131,10 @@ import {
   NLayoutHeader,
   NButton,
   NIcon,
+  NSelect,
   darkTheme
 } from 'naive-ui'
 import {
-  GlobeOutline,
   MoonOutline,
   SunnyOutline
 } from '@vicons/ionicons5'
@@ -157,6 +153,12 @@ const selectedPublication = ref(null)
 const contentPanel = ref(null)
 const activeSection = ref('education')
 
+// Language options
+const languageOptions = [
+  { label: 'English', value: 'en' },
+  { label: '中文', value: 'cn' }
+]
+
 // Theme
 const themeOverrides = {
   common: {
@@ -165,10 +167,6 @@ const themeOverrides = {
     primaryColorPressed: '#1d4ed8',
     borderRadius: '12px'
   }
-}
-
-const toggleLanguage = () => {
-  currentLang.value = currentLang.value === 'en' ? 'cn' : 'en'
 }
 
 const toggleTheme = () => {
@@ -203,6 +201,14 @@ const handleScroll = () => {
         break
       }
     }
+  }
+}
+
+const handleWheel = (event) => {
+  // Forward wheel events to content panel
+  if (contentPanel.value) {
+    event.preventDefault()
+    contentPanel.value.scrollTop += event.deltaY
   }
 }
 </script>
@@ -381,11 +387,13 @@ const handleScroll = () => {
 /* Right Content Panel */
 .right-content-panel {
   flex: 1;
-  padding: 48px 48px 48px 32px;
+  padding: 48px 48px 0 32px;
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
   scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
 }
 
 .content-section {
@@ -418,7 +426,32 @@ const handleScroll = () => {
 .publications-timeline-vertical {
   position: relative;
   padding: 40px 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  cursor: grab;
+}
+
+.publications-timeline-vertical:active {
+  cursor: grabbing;
+}
+
+.publications-timeline-vertical::-webkit-scrollbar {
+  height: 8px;
+}
+
+.publications-timeline-vertical::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+.publications-timeline-vertical::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 4px;
+}
+
+.publications-timeline-vertical::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
 }
 
 .publications-timeline-vertical::before {
@@ -612,10 +645,12 @@ const handleScroll = () => {
 /* Footer */
 .content-footer {
   width: 100%;
-  padding: 24px 32px;
+  padding: 32px 0;
+  margin-top: 40px;
   border-top: 1px solid var(--border-color);
   text-align: center;
   background: var(--bg-primary);
+  flex-shrink: 0;
 }
 
 .content-footer p {

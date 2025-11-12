@@ -43,7 +43,32 @@ defineProps({
 .presentations-timeline-horizontal {
   position: relative;
   padding: 40px 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  cursor: grab;
+}
+
+.presentations-timeline-horizontal:active {
+  cursor: grabbing;
+}
+
+.presentations-timeline-horizontal::-webkit-scrollbar {
+  height: 8px;
+}
+
+.presentations-timeline-horizontal::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+.presentations-timeline-horizontal::-webkit-scrollbar-thumb {
+  background: var(--accent-secondary);
+  border-radius: 4px;
+}
+
+.presentations-timeline-horizontal::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-tertiary);
 }
 
 .presentations-timeline-horizontal::before {
@@ -140,15 +165,17 @@ defineProps({
 }
 
 .pres-type-badge.oral {
-  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+  background: linear-gradient(135deg, #7c3aed, #c026d3);
   color: white;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+  font-weight: 800;
 }
 
 .pres-type-badge.poster {
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  background: linear-gradient(135deg, #0891b2, #0ea5e9);
   color: white;
-  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+  box-shadow: 0 2px 8px rgba(8, 145, 178, 0.4);
+  font-weight: 800;
 }
 
 .presentation-item-horizontal:hover .pres-type-badge {
