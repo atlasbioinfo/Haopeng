@@ -2,11 +2,11 @@
   <section class="section">
     <h2 class="section-title">{{ lang === 'en' ? 'Selected Presentations' : '主要学术报告' }}</h2>
 
-    <div class="presentations-timeline-vertical">
-      <div v-for="(item, index) in data" :key="index" class="presentation-item-vertical">
-        <div class="pres-year-vertical">{{ item.year }}</div>
-        <div class="pres-marker-vertical"></div>
-        <div class="pres-content-vertical">
+    <div class="presentations-timeline-horizontal">
+      <div v-for="(item, index) in data" :key="index" class="presentation-item-horizontal">
+        <div class="pres-year-badge">{{ item.year }}</div>
+        <div class="pres-marker-circle"></div>
+        <div class="pres-content-card">
           <span class="pres-type-badge" :class="item.type.toLowerCase()">{{ item.type }}</span>
           <p class="pres-title">{{ item.title[lang] }}</p>
         </div>
@@ -29,7 +29,7 @@ defineProps({
 </script>
 
 <style scoped>
-/* Presentations Vertical Timeline */
+/* Presentations Horizontal Timeline */
 .section-title {
   font-family: 'Crimson Text', serif;
   font-size: 32px;
@@ -37,96 +37,101 @@ defineProps({
   color: var(--text-primary);
   margin: 0 0 32px 0;
   padding-bottom: 16px;
-  border-bottom: 3px solid #2563eb;
+  border-bottom: 3px solid var(--accent-primary);
 }
 
-.presentations-timeline-vertical {
+.presentations-timeline-horizontal {
   position: relative;
-  padding: 32px 0 32px 80px;
+  padding: 40px 0;
+  overflow: hidden;
 }
 
-.presentations-timeline-vertical::before {
+.presentations-timeline-horizontal::before {
   content: '';
   position: absolute;
-  left: 28px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, #667eea, #764ba2, #667eea);
+  top: 80px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--accent-secondary), var(--accent-tertiary), var(--accent-secondary));
   border-radius: 2px;
-  box-shadow: 0 0 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
 }
 
-.presentation-item-vertical {
+.presentation-item-horizontal {
+  display: inline-block;
   position: relative;
-  margin-bottom: 40px;
-  display: grid;
-  grid-template-columns: 120px auto;
-  gap: 32px;
-  align-items: start;
+  width: 280px;
+  margin-right: 24px;
+  margin-bottom: 32px;
+  vertical-align: top;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.presentation-item-vertical:hover {
-  transform: translateX(8px);
+.presentation-item-horizontal:hover {
+  transform: translateY(-8px);
 }
 
-.pres-year-vertical {
+.pres-year-badge {
   position: absolute;
-  left: -52px;
-  top: 8px;
-  font-size: 15px;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
   font-weight: 700;
-  color: #764ba2;
+  color: var(--accent-secondary);
   background: var(--bg-primary);
   padding: 6px 14px;
   border-radius: 20px;
-  border: 2px solid #764ba2;
+  border: 2px solid var(--accent-secondary);
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(118, 75, 162, 0.15);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
   z-index: 2;
 }
 
-.pres-marker-vertical {
+.pres-marker-circle {
   position: absolute;
-  left: -52px;
-  top: 16px;
-  width: 18px;
-  height: 18px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
   border: 4px solid var(--bg-primary);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.15), 0 2px 8px rgba(118, 75, 162, 0.3);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15), 0 2px 8px rgba(139, 92, 246, 0.3);
   z-index: 3;
   transition: all 0.3s ease;
 }
 
-.presentation-item-vertical:hover .pres-marker-vertical {
-  transform: scale(1.3);
-  background: linear-gradient(135deg, #764ba2, #9f7aea);
-  box-shadow: 0 0 0 6px rgba(118, 75, 162, 0.2), 0 4px 12px rgba(118, 75, 162, 0.4);
+.presentation-item-horizontal:hover .pres-marker-circle {
+  transform: translateX(-50%) scale(1.3);
+  background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-primary));
+  box-shadow: 0 0 0 6px rgba(236, 72, 153, 0.2), 0 2px 8px rgba(236, 72, 153, 0.4);
 }
 
-.pres-content-vertical {
+.pres-content-card {
   background: var(--bg-primary);
   border: 2px solid var(--border-color);
   border-radius: 12px;
   padding: 20px;
+  margin-top: 72px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
+  min-height: 160px;
 }
 
-.presentation-item-vertical:hover .pres-content-vertical {
-  border-color: #764ba2;
+.presentation-item-horizontal:hover .pres-content-card {
+  border-color: var(--accent-secondary);
   box-shadow: var(--shadow-md);
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(236, 72, 153, 0.05));
 }
 
 .pres-type-badge {
   display: inline-block;
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -135,24 +140,24 @@ defineProps({
 }
 
 .pres-type-badge.oral {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
   color: white;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
 }
 
 .pres-type-badge.poster {
-  background: linear-gradient(135deg, #06b6d4, #2563eb);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: white;
-  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
 }
 
-.presentation-item-vertical:hover .pres-type-badge {
+.presentation-item-horizontal:hover .pres-type-badge {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
 }
 
 .pres-title {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-primary);
   line-height: 1.7;
   margin: 0;

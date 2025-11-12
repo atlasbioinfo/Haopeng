@@ -5,12 +5,12 @@
       <n-layout-header bordered class="top-nav">
         <div class="nav-content">
           <div class="nav-links">
-            <a @click="scrollToSection('education')" class="nav-link">Education</a>
-            <a @click="scrollToSection('employment')" class="nav-link">Employment</a>
-            <a @click="scrollToSection('grants')" class="nav-link">Grants</a>
-            <a @click="scrollToSection('awards')" class="nav-link">Awards</a>
-            <a @click="scrollToSection('presentations')" class="nav-link">Presentations</a>
-            <a @click="scrollToSection('publications')" class="nav-link">Publications</a>
+            <a @click="scrollToSection('education')" class="nav-link" :class="{ active: activeSection === 'education' }">Education</a>
+            <a @click="scrollToSection('employment')" class="nav-link" :class="{ active: activeSection === 'employment' }">Employment</a>
+            <a @click="scrollToSection('grants')" class="nav-link" :class="{ active: activeSection === 'grants' }">Grants</a>
+            <a @click="scrollToSection('awards')" class="nav-link" :class="{ active: activeSection === 'awards' }">Awards</a>
+            <a @click="scrollToSection('presentations')" class="nav-link" :class="{ active: activeSection === 'presentations' }">Presentations</a>
+            <a @click="scrollToSection('publications')" class="nav-link" :class="{ active: activeSection === 'publications' }">Publications</a>
           </div>
           <div class="nav-controls">
             <n-button
@@ -55,7 +55,7 @@
         </aside>
 
         <!-- Right Scrollable Content -->
-        <main class="right-content-panel" ref="contentPanel">
+        <main class="right-content-panel" ref="contentPanel" @scroll="handleScroll">
           <!-- Education & Employment Section -->
           <section id="education-employment" class="content-section">
             <div class="two-column-layout">
@@ -114,15 +114,15 @@
               </div>
             </div>
           </section>
-
-          <!-- Footer -->
-          <footer class="content-footer">
-            <p>
-              {{ currentLang === 'en' ? '© 2025 Haopeng Yu. All rights reserved.' : '© 2025 余浩鹏. 版权所有.' }}
-            </p>
-          </footer>
         </main>
       </div>
+
+      <!-- Footer -->
+      <footer class="content-footer">
+        <p>
+          {{ currentLang === 'en' ? '© 2025 Haopeng Yu. All rights reserved.' : '© 2025 余浩鹏. 版权所有.' }}
+        </p>
+      </footer>
     </n-layout>
   </n-config-provider>
 </template>
@@ -155,6 +155,7 @@ const currentLang = ref('en')
 const isDark = ref(false)
 const selectedPublication = ref(null)
 const contentPanel = ref(null)
+const activeSection = ref('education')
 
 // Theme
 const themeOverrides = {
@@ -184,29 +185,55 @@ const scrollToSection = (sectionId) => {
     })
   }
 }
+
+const handleScroll = () => {
+  if (!contentPanel.value) return
+
+  const sections = ['education', 'employment', 'grants', 'awards', 'presentations', 'publications']
+  const scrollPosition = contentPanel.value.scrollTop + 100
+
+  for (const sectionId of sections) {
+    const section = document.getElementById(sectionId)
+    if (section) {
+      const sectionTop = section.offsetTop - contentPanel.value.offsetTop
+      const sectionBottom = sectionTop + section.offsetHeight
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        activeSection.value = sectionId
+        break
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>
-/* Global Variables */
+/* Global Variables - New Color Scheme */
 :root {
   --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --text-primary: #1a202c;
-  --text-secondary: #4a5568;
-  --text-muted: #718096;
-  --border-color: #e2e8f0;
+  --bg-secondary: #f9fafb;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border-color: #e5e7eb;
+  --accent-primary: #0ea5e9;
+  --accent-secondary: #8b5cf6;
+  --accent-tertiary: #ec4899;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .dark-mode {
-  --bg-primary: #1a202c;
-  --bg-secondary: #2d3748;
-  --text-primary: #f7fafc;
-  --text-secondary: #e2e8f0;
-  --text-muted: #cbd5e1;
-  --border-color: #4a5568;
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --accent-primary: #38bdf8;
+  --accent-secondary: #a78bfa;
+  --accent-tertiary: #f472b6;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
@@ -246,11 +273,29 @@ const scrollToSection = (sectionId) => {
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
+  position: relative;
 }
 
 .nav-link:hover {
-  color: #2563eb;
+  color: var(--accent-primary);
   background: var(--bg-secondary);
+}
+
+.nav-link.active {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: var(--accent-primary);
+  border-radius: 2px;
 }
 
 .nav-controls {
@@ -264,20 +309,22 @@ const scrollToSection = (sectionId) => {
   display: flex;
   max-width: 1600px;
   margin: 0 auto;
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  overflow: hidden;
 }
 
 /* Left Fixed Panel */
 .left-fixed-panel {
-  position: sticky;
-  top: 80px;
+  position: relative;
   width: 420px;
-  height: calc(100vh - 100px);
+  height: 100%;
   padding: 48px 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+  background: var(--bg-primary);
 }
 
 .profile-section {
@@ -336,6 +383,9 @@ const scrollToSection = (sectionId) => {
   flex: 1;
   padding: 48px 48px 48px 32px;
   overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  scroll-behavior: smooth;
 }
 
 .content-section {
@@ -350,7 +400,7 @@ const scrollToSection = (sectionId) => {
   color: var(--text-primary);
   margin: 0 0 32px 0;
   padding-bottom: 16px;
-  border-bottom: 3px solid #2563eb;
+  border-bottom: 3px solid var(--accent-primary);
 }
 
 /* Two Column Layout */
@@ -364,89 +414,92 @@ const scrollToSection = (sectionId) => {
   min-width: 0;
 }
 
-/* Publications Vertical Timeline */
+/* Publications Horizontal Timeline */
 .publications-timeline-vertical {
   position: relative;
-  padding: 32px 0 32px 80px;
+  padding: 40px 0;
+  overflow: hidden;
 }
 
 .publications-timeline-vertical::before {
   content: '';
   position: absolute;
-  left: 28px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, #2563eb, #3b82f6, #60a5fa, #818cf8);
+  top: 80px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
   border-radius: 2px;
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.3);
 }
 
 .publication-item-vertical {
+  display: inline-block;
   position: relative;
-  margin-bottom: 48px;
-  display: grid;
-  grid-template-columns: 120px auto;
-  gap: 32px;
-  align-items: start;
+  width: 320px;
+  margin-right: 24px;
+  margin-bottom: 32px;
+  vertical-align: top;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .publication-item-vertical:hover {
-  transform: translateX(8px);
+  transform: translateY(-8px);
 }
 
 .pub-year-vertical {
   position: absolute;
-  left: -52px;
-  top: 8px;
-  font-size: 16px;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--accent-primary);
   background: var(--bg-primary);
   padding: 6px 14px;
   border-radius: 20px;
-  border: 2px solid #2563eb;
+  border: 2px solid var(--accent-primary);
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15);
   z-index: 2;
 }
 
 .pub-marker-vertical {
   position: absolute;
-  left: -52px;
-  top: 16px;
-  width: 20px;
-  height: 20px;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   border: 4px solid var(--bg-primary);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15), 0 2px 8px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15), 0 2px 8px rgba(14, 165, 233, 0.3);
   z-index: 3;
   transition: all 0.3s ease;
 }
 
 .publication-item-vertical:hover .pub-marker-vertical {
-  transform: scale(1.3);
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.2), 0 4px 12px rgba(37, 99, 235, 0.4);
+  transform: translateX(-50%) scale(1.3);
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+  box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.2), 0 2px 8px rgba(14, 165, 233, 0.4);
 }
 
 .publication-item-vertical.expanded .pub-marker-vertical {
-  width: 24px;
-  height: 24px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.25), 0 4px 16px rgba(102, 126, 234, 0.5);
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-secondary));
+  box-shadow: 0 0 0 8px rgba(236, 72, 153, 0.25), 0 4px 16px rgba(236, 72, 153, 0.5);
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.25), 0 4px 16px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 0 0 8px rgba(236, 72, 153, 0.25), 0 4px 16px rgba(236, 72, 153, 0.5);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(102, 126, 234, 0.15), 0 4px 20px rgba(102, 126, 234, 0.6);
+    box-shadow: 0 0 0 12px rgba(236, 72, 153, 0.15), 0 4px 20px rgba(236, 72, 153, 0.6);
   }
 }
 
@@ -455,38 +508,51 @@ const scrollToSection = (sectionId) => {
   border: 2px solid var(--border-color);
   border-radius: 16px;
   padding: 24px;
+  margin-top: 72px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
+  height: 100%;
+  min-height: 200px;
 }
 
 .publication-item-vertical:hover .pub-content-vertical {
-  border-color: #2563eb;
+  border-color: var(--accent-primary);
   box-shadow: var(--shadow-md);
   background: var(--bg-secondary);
 }
 
+.publication-item-vertical.expanded {
+  width: 400px;
+}
+
 .publication-item-vertical.expanded .pub-content-vertical {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   border-color: transparent;
   box-shadow: var(--shadow-lg);
+  min-height: 280px;
 }
 
 .pub-title-vertical {
   font-family: 'Crimson Text', serif;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0 0 12px 0;
   line-height: 1.5;
   transition: color 0.3s;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .publication-item-vertical.expanded .pub-title-vertical {
   color: white;
+  -webkit-line-clamp: unset;
 }
 
 .pub-authors-vertical {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
   margin: 0 0 12px 0;
   line-height: 1.6;
@@ -494,7 +560,7 @@ const scrollToSection = (sectionId) => {
 }
 
 .publication-item-vertical.expanded .pub-authors-vertical {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .pub-details-vertical {
@@ -517,7 +583,7 @@ const scrollToSection = (sectionId) => {
 
 .pub-journal-vertical,
 .pub-volume-vertical {
-  font-size: 14px;
+  font-size: 13px;
   margin: 8px 0;
   color: rgba(255, 255, 255, 0.95);
   line-height: 1.6;
@@ -531,7 +597,7 @@ const scrollToSection = (sectionId) => {
   border-radius: 8px;
   color: white;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   transition: all 0.2s;
   backdrop-filter: blur(10px);
@@ -545,9 +611,11 @@ const scrollToSection = (sectionId) => {
 
 /* Footer */
 .content-footer {
-  padding: 32px 0;
+  width: 100%;
+  padding: 24px 32px;
   border-top: 1px solid var(--border-color);
   text-align: center;
+  background: var(--bg-primary);
 }
 
 .content-footer p {
