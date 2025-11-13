@@ -338,14 +338,14 @@ const handleScroll = () => {
   bottom: 0;
   background:
     /* Subtle hexagon pattern */
-    radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.02) 2px, transparent 2px),
-    radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.02) 2px, transparent 2px),
-    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.02) 2px, transparent 2px),
-    radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.02) 2px, transparent 2px),
+    radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.1) 2px, transparent 2px),
     /* Main neural glow */
-    radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+    radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
   background-size:
     60px 60px,
     60px 60px,
@@ -377,13 +377,13 @@ const handleScroll = () => {
   bottom: 0;
   background-image:
     /* Diagonal tech lines */
-    linear-gradient(45deg, transparent 48%, rgba(14, 165, 233, 0.015) 48%, rgba(14, 165, 233, 0.015) 52%, transparent 52%),
-    linear-gradient(-45deg, transparent 48%, rgba(139, 92, 246, 0.015) 48%, rgba(139, 92, 246, 0.015) 52%, transparent 52%),
+    linear-gradient(45deg, transparent 48%, rgba(14, 165, 233, 0.1) 48%, rgba(14, 165, 233, 0.1) 52%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(139, 92, 246, 0.1) 48%, rgba(139, 92, 246, 0.1) 52%, transparent 52%),
     /* Main grid */
-    linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px),
     /* Circuit board dots at intersections */
-    radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+    radial-gradient(circle at center, rgba(139, 92, 246, 0.12) 1px, transparent 1px);
   background-size:
     120px 120px,
     120px 120px,
@@ -426,39 +426,6 @@ const handleScroll = () => {
   max-width: 360px;
   position: relative;
   z-index: 1;
-}
-
-/* Subtle scan line effect */
-.profile-section::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(14, 165, 233, 0.15) 50%,
-    transparent 100%);
-  animation: scanLine 12s ease-in-out infinite;
-  z-index: -1;
-  opacity: 0;
-}
-
-@keyframes scanLine {
-  0%, 20%, 100% {
-    top: 0;
-    opacity: 0;
-  }
-  30% {
-    opacity: 0.2;
-  }
-  50% {
-    top: 100%;
-    opacity: 0.2;
-  }
-  70% {
-    opacity: 0;
-  }
 }
 
 .photo-wrapper {
