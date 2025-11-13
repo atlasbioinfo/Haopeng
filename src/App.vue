@@ -40,6 +40,7 @@
       <div class="main-container">
         <!-- Left Fixed Panel -->
         <aside class="left-fixed-panel">
+          <ParticlesBackground :isDark="isDark" />
           <div class="profile-section">
             <div class="photo-wrapper">
               <img :src="resumeData.personal.photo" alt="Profile Photo" class="profile-photo" />
@@ -147,6 +148,7 @@ import Employment from './components/Employment.vue'
 import Grants from './components/Grants.vue'
 import Awards from './components/Awards.vue'
 import Presentations from './components/Presentations.vue'
+import ParticlesBackground from './components/ParticlesBackground.vue'
 
 // State
 const currentLang = ref('en')
@@ -328,98 +330,7 @@ const handleScroll = () => {
   overflow: hidden;
 }
 
-/* AI Neural Network Background */
-.left-fixed-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    /* Subtle hexagon pattern */
-    radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.1) 2px, transparent 2px),
-    radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.1) 2px, transparent 2px),
-    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.1) 2px, transparent 2px),
-    radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.1) 2px, transparent 2px),
-    /* Main neural glow */
-    radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-  background-size:
-    60px 60px,
-    60px 60px,
-    60px 60px,
-    60px 60px,
-    100% 100%,
-    100% 100%,
-    100% 100%;
-  animation: aiGlow 8s ease-in-out infinite, floatingDots 20s linear infinite;
-  z-index: 0;
-}
-
-@keyframes floatingDots {
-  0% {
-    background-position: 0 0, 15px 15px, 30px 30px, 45px 45px, 0 0, 0 0, 0 0;
-  }
-  100% {
-    background-position: 60px 60px, 75px 75px, 90px 90px, 105px 105px, 0 0, 0 0, 0 0;
-  }
-}
-
-/* AI Grid Pattern with Circuit Lines */
-.left-fixed-panel::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image:
-    /* Diagonal tech lines */
-    linear-gradient(45deg, transparent 48%, rgba(14, 165, 233, 0.1) 48%, rgba(14, 165, 233, 0.1) 52%, transparent 52%),
-    linear-gradient(-45deg, transparent 48%, rgba(139, 92, 246, 0.1) 48%, rgba(139, 92, 246, 0.1) 52%, transparent 52%),
-    /* Main grid */
-    linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px),
-    /* Circuit board dots at intersections */
-    radial-gradient(circle at center, rgba(139, 92, 246, 0.12) 1px, transparent 1px);
-  background-size:
-    120px 120px,
-    120px 120px,
-    30px 30px,
-    30px 30px,
-    30px 30px;
-  animation: gridMove 20s linear infinite, circuitPulse 4s ease-in-out infinite;
-  z-index: 0;
-}
-
-@keyframes circuitPulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-@keyframes aiGlow {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
-@keyframes gridMove {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(30px, 30px);
-  }
-}
+/* Removed old grid/circuit background - now using particles */
 
 .profile-section {
   text-align: center;
