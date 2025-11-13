@@ -1,15 +1,12 @@
 <template>
-  <Particles
+  <vue-particles
     id="tsparticles"
-    :particlesInit="particlesInit"
     :options="particlesOptions"
   />
 </template>
 
 <script setup>
 import { computed } from 'vue';
-import { Particles } from "@tsparticles/vue3";
-import { loadSlim } from "@tsparticles/slim";
 
 const props = defineProps({
   isDark: {
@@ -17,11 +14,6 @@ const props = defineProps({
     default: false
   }
 });
-
-// Initialize the particles engine
-const particlesInit = async (engine) => {
-  await loadSlim(engine);
-};
 
 // Reactive options based on theme
 const particlesOptions = computed(() => ({
