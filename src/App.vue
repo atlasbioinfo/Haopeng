@@ -108,7 +108,6 @@
                     </svg>
                     DOI: {{ pub.doi.replace('https://doi.org/', '') }}
                   </a>
-                  <span v-if="pub.note" class="pub-note">{{ pub.note }}</span>
                 </div>
               </div>
             </div>
@@ -326,11 +325,143 @@ const handleScroll = () => {
   flex-shrink: 0;
   border-right: 1px solid var(--border-color);
   background: var(--bg-primary);
+  overflow: hidden;
+}
+
+/* AI Neural Network Background */
+.left-fixed-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    /* Subtle hexagon pattern */
+    radial-gradient(circle at 0% 0%, rgba(14, 165, 233, 0.02) 2px, transparent 2px),
+    radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.02) 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.02) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.02) 2px, transparent 2px),
+    /* Main neural glow */
+    radial-gradient(circle at 20% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 50%);
+  background-size:
+    60px 60px,
+    60px 60px,
+    60px 60px,
+    60px 60px,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  animation: aiGlow 8s ease-in-out infinite, floatingDots 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatingDots {
+  0% {
+    background-position: 0 0, 15px 15px, 30px 30px, 45px 45px, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 60px 60px, 75px 75px, 90px 90px, 105px 105px, 0 0, 0 0, 0 0;
+  }
+}
+
+/* AI Grid Pattern with Circuit Lines */
+.left-fixed-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    /* Diagonal tech lines */
+    linear-gradient(45deg, transparent 48%, rgba(14, 165, 233, 0.015) 48%, rgba(14, 165, 233, 0.015) 52%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(139, 92, 246, 0.015) 48%, rgba(139, 92, 246, 0.015) 52%, transparent 52%),
+    /* Main grid */
+    linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+    /* Circuit board dots at intersections */
+    radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+  background-size:
+    120px 120px,
+    120px 120px,
+    30px 30px,
+    30px 30px,
+    30px 30px;
+  animation: gridMove 20s linear infinite, circuitPulse 4s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes circuitPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes aiGlow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(30px, 30px);
+  }
 }
 
 .profile-section {
   text-align: center;
   max-width: 360px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Scan line effect */
+.profile-section::before {
+  content: '';
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(14, 165, 233, 0.3) 20%,
+    rgba(139, 92, 246, 0.5) 50%,
+    rgba(236, 72, 153, 0.3) 80%,
+    transparent 100%);
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+  animation: scanLine 8s ease-in-out infinite;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+@keyframes scanLine {
+  0%, 100% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  50% {
+    top: 100%;
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0;
+  }
 }
 
 .photo-wrapper {
@@ -341,12 +472,47 @@ const handleScroll = () => {
   overflow: hidden;
   border: 6px solid var(--bg-secondary);
   box-shadow: var(--shadow-lg);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.photo-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg,
+    var(--accent-primary),
+    var(--accent-secondary),
+    var(--accent-tertiary),
+    var(--accent-primary));
+  background-size: 300% 300%;
+  animation: aiGradient 4s ease infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-wrapper:hover::before {
+  opacity: 0.6;
 }
 
 .photo-wrapper:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 12px 32px rgba(14, 165, 233, 0.3),
+              0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+@keyframes aiGradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .profile-photo {
@@ -360,16 +526,24 @@ const handleScroll = () => {
   font-family: 'Crimson Text', serif;
   font-size: 38px;
   font-weight: 700;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0 0 12px 0;
   letter-spacing: -0.02em;
+  position: relative;
 }
 
 .profile-title {
   font-size: 18px;
   font-weight: 600;
-  color: #2563eb;
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin: 0 0 16px 0;
+  position: relative;
 }
 
 .profile-subtitle {
@@ -377,6 +551,29 @@ const handleScroll = () => {
   color: var(--text-secondary);
   line-height: 1.7;
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--accent-primary);
+  width: fit-content;
+  animation: typing 3.5s steps(60, end), blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--accent-primary);
+  }
 }
 
 /* Right Content Panel */
