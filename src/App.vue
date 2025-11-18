@@ -116,15 +116,13 @@
 
           <!-- Footer -->
           <footer class="content-footer">
-            <p>
-              {{ currentLang === 'en' ? '© 2025 Haopeng Yu. All rights reserved.' : '© 2025 余浩鹏. 版权所有.' }}
+            <VisitorStats :isDark="isDark" :lang="currentLang" />
+            <p class="copyright">
+              {{ currentLang === 'en' ? '© 2025 Haopeng Yu. All rights reserved.' : '© 2025 于昊澎. 版权所有.' }}
             </p>
           </footer>
         </main>
       </div>
-
-      <!-- Visitor Statistics -->
-      <VisitorStats :isDark="isDark" :lang="currentLang" />
     </n-layout>
   </n-config-provider>
 </template>
@@ -592,9 +590,13 @@ const handleScroll = () => {
   text-align: center;
   background: var(--bg-primary);
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-.content-footer p {
+.content-footer .copyright {
   color: var(--text-muted);
   font-size: 14px;
   margin: 0;
