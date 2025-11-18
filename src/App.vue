@@ -118,7 +118,7 @@
           <footer class="content-footer">
             <VisitorStats :isDark="isDark" :lang="currentLang" />
             <p class="copyright">
-              {{ currentLang === 'en' ? '© 2025 Haopeng Yu. All rights reserved.' : '© 2025 余浩鹏. 版权所有.' }}
+              {{ currentLang === 'en' ? '© 2025 Haopeng Yu. All rights reserved.' : '© 2025 于昊澎. 版权所有.' }}
             </p>
           </footer>
         </main>
