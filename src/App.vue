@@ -122,6 +122,9 @@
           </footer>
         </main>
       </div>
+
+      <!-- Visitor Statistics -->
+      <VisitorStats :isDark="isDark" :lang="currentLang" />
     </n-layout>
   </n-config-provider>
 </template>
@@ -149,6 +152,7 @@ import Grants from './components/Grants.vue'
 import Awards from './components/Awards.vue'
 import Presentations from './components/Presentations.vue'
 import ParticlesBackground from './components/ParticlesBackground.vue'
+import VisitorStats from './components/VisitorStats.vue'
 
 // State
 const currentLang = ref('en')
